@@ -33,6 +33,13 @@ namespace Movie_Hub_Backend.Controllers
             await _movieService.CreateAsync(movie);
         }
 
+        [HttpPost]
+        [Route("/CreateDefault")]
+        public async Task CreateDefaultMovies()
+        {
+            await _movieService.CreateDefaultAsync();
+        }
+
         [HttpPut]
         [Route("/Update")]
         public async Task UpdateMovie(string title, Movie newMovie)

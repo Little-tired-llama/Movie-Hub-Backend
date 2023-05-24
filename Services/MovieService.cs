@@ -29,6 +29,12 @@ namespace Movie_Hub_Backend.Services
             await _movieCollection.InsertOneAsync(movie);
         }
 
+        public async Task CreateDefaultAsync()
+        {
+            
+            foreach (var mv in DefaultMoviesList.movies)
+                await _movieCollection.InsertOneAsync(mv);
+        }
         public async Task DeleteAsync(string title)
         { 
             await _movieCollection.DeleteOneAsync(x => x.Title == title);

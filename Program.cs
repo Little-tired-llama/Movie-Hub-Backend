@@ -3,6 +3,16 @@ using Movie_Hub_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+
 builder.Services.Configure<MovieHubDatabaseSettings>(builder.Configuration.GetSection("MovieHubDatabase"));
 
 builder.Services.AddSingleton<MovieService>();
@@ -28,6 +38,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
